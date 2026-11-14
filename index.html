@@ -1,79 +1,147 @@
 HTML
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Table Five Poker</title>
 <style>
-body{background:#092b20;color:white;font-family:Arial;text-align:center;margin:0}
-header{padding:15px;background:#071b15}
-h1{color:gold}
-.table{background:#087044;border:10px solid #744321;border-radius:48%;margin:25px auto;padding:35px 10px;max-width:600px;min-height:260px}
-.seats{display:flex;justify-content:space-around;flex-wrap:wrap;gap:15px}
-.player{background:#06452e;border:2px solid gold;border-radius:12px;padding:12px;min-width:85px}
-.cards{font-size:27px;letter-spacing:3px;margin:25px}
-button{background:gold;color:#172016;border:0;border-radius:9px;padding:13px;margin:5px;font-weight:bold;font-size:16px}
-button:active{background:white}
-#status{color:#ffe58a;font-size:18px}
+*{box-sizing:border-box}
+body{
+margin:0;background:radial-gradient(#202923,#050807);
+color:#fff;font-family:Arial,sans-serif;text-align:center;
+}
+header{padding:18px;background:#080b09;border-bottom:2px solid #c9a44c}
+h1{margin:0;color:#e6c36b;letter-spacing:4px;font-size:27px}
+.subtitle{color:#b8a77b;font-size:11px;letter-spacing:3px;margin-top:8px}
+main{max-width:850px;margin:auto;padding:15px}
+.table{
+position:relative;margin:25px auto;
+background:radial-gradient(ellipse,#14764a,#06432c 70%,#032b1d);
+border:12px solid #b38b42;
+border-radius:48%;
+min-height:390px;padding:24px 10px;
+box-shadow:0 0 0 5px #422c16,0 12px 35px #000;
+}
+.seats{display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:12px}
+.player{
+background:linear-gradient(145deg,#202c27,#090e0c);
+border:1px solid #c9a44c;border-radius:13px;
+padding:9px;width:105px;min-height:105px;
+box-shadow:0 5px 12px #00170d;
+}
+.avatar{font-size:29px}
+.player strong{display:block;color:#e6c36b;font-size:12px;margin:5px}
+.player small{color:#ddd;font-size:11px}
+.camera{font-size:10px;color:#a9c9b5}
+.center{margin:20px auto}
+.cards{font-size:35px;letter-spacing:4px;min-height:48px}
+.card{
+display:inline-block;background:#fff;color:#171717;
+border-radius:6px;padding:9px 5px;
+min-width:38px;margin:3px;
+font-size:22px;box-shadow:0 3px 5px #001;
+}
+.red{color:#c52030}
+.pot{color:#f5d77b;font-size:20px;font-weight:bold;margin:12px}
+.chips{color:#fff;margin:12px;font-size:15px}
+.controls{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin:20px 0}
+button{
+background:linear-gradient(#e9cf83,#a77a2d);
+border:1px solid #ffe6a0;border-radius:8px;
+padding:13px 19px;font-weight:bold;color:#17130a;
+font-size:14px;cursor:pointer;
+}
+button:active{transform:scale(.96)}
+.status{color:#f4d78c;min-height:26px;margin:15px}
+footer{color:#927e56;font-size:11px;padding:15px}
 </style>
 </head>
 <body>
-<header><h1>♠ TABLE FIVE POKER ♠</h1>
-5 PLAYER TEXAS HOLD'EM</header>
+<header>
+<h1>♠ TABLE FIVE ♠</h1>
+<div class="subtitle">PREMIUM POKER CLUB</div>
+</header>
+<main>
 <div class="table">
 <div class="seats" id="players">
-<div class="player">Player 1<br>🃏<br>$1000</div>
-<div class="player">Player 2<br>🃏<br>$1000</div>
-<div class="player">Player 3<br>🃏<br>$1000</div>
-<div class="player">Player 4<br>🃏<br>$1000</div>
-<div class="player">YOU<br>🂠 🂠<br>$1000</div>
+<div class="player"><div class="avatar">👤</div><strong>PLAYER 1</strong><small>$1,000</small><div class="camera">CAMERA SPACE</div></div>
+<div class="player"><div class="avatar">👤</div><strong>PLAYER 2</strong><small>$1,000</small><div class="camera">CAMERA SPACE</div></div>
+<div class="player"><div class="avatar">👤</div><strong>PLAYER 3</strong><small>$1,000</small><div class="camera">CAMERA SPACE</div></div>
+<div class="player"><div class="avatar">👤</div><strong>PLAYER 4</strong><small>$1,000</small><div class="camera">CAMERA SPACE</div></div>
+<div class="player"><div class="avatar">😎</div><strong>YOU</strong><small id="seatChips">$1,000</small><div class="camera">YOUR SEAT</div></div>
 </div>
-<div class="cards" id="community">♣ ♦ ♥ ♠</div>
-<div id="pot">Pot: $0</div>
+<div class="center">
+<div class="pot" id="pot">POT: $0</div>
+<div class="cards" id="community">🂠 🂠 🂠 🂠 🂠</div>
+<div class="chips" id="hand">Your cards: 🂠 🂠</div>
 </div>
-<h2 id="status">Welcome to Table Five Poker!</h2>
-<p id="chips">Your chips: $1000</p>
-<button onclick="deal()">DEAL CARDS</button>
+</div>
+<div class="status" id="status">WELCOME TO TABLE FIVE POKER</div>
+<div class="chips" id="balance">YOUR CHIPS: $1,000</div>
+<div class="controls">
+<button onclick="deal()">DEAL</button>
 <button onclick="bet(50)">BET $50</button>
 <button onclick="bet(100)">BET $100</button>
 <button onclick="fold()">FOLD</button>
-<button onclick="nextHand()">NEW HAND</button>
+<button onclick="newHand()">NEW HAND</button>
+</div>
+</main>
+<footer>TABLE FIVE POKER • PREMIUM EDITION</footer>
 <script>
-let money=1000,pot=0,deck=[],active=false;
-const suits=["♠","♥","♦","♣"];
+let money=1000,pot=0,deck=[],active=false,handBet=0;
 function shuffle(){
+const suits=["♠","♥","♦","♣"];
+const ranks=["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
 deck=[];
-for(let s of suits)for(let n of ["2","3","4","5","6","7","8","9","10","J","Q","K","A"])deck.push(n+s);
-deck.sort(()=>Math.random()-.5);
+for(let s of suits)for(let r of ranks)deck.push(r+s);
+for(let i=deck.length-1;i>0;i--){
+let j=Math.floor(Math.random()*(i+1));
+[deck[i],deck[j]]=[deck[j],deck[i]];
+}
+}
+function drawCard(c){
+let red=c.includes("♥")||c.includes("♦");
+return '<span class="card '+(red?'red':'')+'">'+c+'</span>';
+}
+function update(){
+document.getElementById("balance").innerText="YOUR CHIPS: $"+money;
+document.getElementById("seatChips").innerText="$"+money;
+document.getElementById("pot").innerText="POT: $"+pot;
 }
 function deal(){
-if(active)return;
-shuffle();pot=0;active=true;
-let hand=[deck.pop(),deck.pop()];
-document.getElementById("community").innerText="🂠 🂠 🂠   🂠   🂠";
-document.getElementById("players").children[4].innerHTML="YOU<br>"+hand.join(" ")+"<br>$"+money;
+if(active){document.getElementById("status").innerText="Finish this hand first.";return;}
+if(money<=0){document.getElementById("status").innerText="No chips remaining.";return;}
+shuffle();pot=0;handBet=0;active=true;
+let h=[deck.pop(),deck.pop()];
+document.getElementById("hand").innerHTML="YOUR CARDS: "+h.map(drawCard).join("");
+document.getElementById("community").innerHTML="🂠 🂠 🂠 🂠 🂠";
 document.getElementById("status").innerText="Cards dealt! Place your bet.";
-document.getElementById("pot").innerText="Pot: $0";
+update();
 }
-function bet(amount){
-if(!active){alert("Deal cards first!");return;}
-if(money<amount){alert("Not enough chips!");return;}
-money-=amount;pot+=amount;
-document.getElementById("chips").innerText="Your chips: $"+money;
-document.getElementById("pot").innerText="Pot: $"+pot;
-document.getElementById("community").innerText=deck.pop()+"  "+deck.pop()+"  "+deck.pop()+"  "+deck.pop()+"  "+deck.pop();
-document.getElementById("status").innerText="Bet placed! Hand complete. Start a new hand.";
-money+=pot;pot=0;active=false;
-document.getElementById("chips").innerText="Your chips: $"+money;
-document.getElementById("pot").innerText="Pot: $0";
+function bet(n){
+if(!active){document.getElementById("status").innerText="Deal first!";return;}
+if(money<n){document.getElementById("status").innerText="Not enough chips!";return;}
+money-=n;pot+=n;handBet+=n;
+let cards=[deck.pop(),deck.pop(),deck.pop(),deck.pop(),deck.pop()];
+document.getElementById("community").innerHTML=cards.map(drawCard).join("");
+document.getElementById("status").innerText="Bet recorded. Your hand is ready for a showdown.";
+update();
 }
 function fold(){
 if(!active)return;
-active=false;pot=0;
-document.getElementById("status").innerText="You folded. Start a new hand.";
+active=false;
+document.getElementById("status").innerText="You folded. Pot is unclaimed in this demo.";
+document.getElementById("hand").innerText="Your cards: 🂠 🂠";
 }
-function nextHand(){deal();}
+function newHand(){
+active=false;pot=0;handBet=0;
+document.getElementById("community").innerHTML="🂠 🂠 🂠 🂠 🂠";
+document.getElementById("hand").innerText="Your cards: 🂠 🂠";
+document.getElementById("status").innerText="Ready for the next hand!";
+update();
+}
 </script>
 </body>
 </html>
